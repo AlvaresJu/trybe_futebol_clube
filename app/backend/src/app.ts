@@ -2,10 +2,12 @@ import * as express from 'express';
 import 'express-async-errors';
 import errorMiddleware from './middlewares/errorMiddleware';
 import LoginRoutes from './routes/LoginRoutes';
+import TeamsRoutes from './routes/TeamsRoutes';
 
 class App {
   public app: express.Express;
   private loginRoutes: LoginRoutes;
+  private teamsRoutes: TeamsRoutes;
 
   constructor() {
     this.app = express();
@@ -13,11 +15,13 @@ class App {
     this.config();
 
     this.loginRoutes = new LoginRoutes();
+    this.teamsRoutes = new TeamsRoutes();
 
     // Não remover essa rota
     this.app.get('/', (_req, res) => res.json({ ok: true }));
 
     this.app.use('/login', this.loginRoutes.loginRouter);
+    this.app.use('/teams', this.teamsRoutes.teamsRouter);
 
     this.app.use(errorMiddleware);
   }
