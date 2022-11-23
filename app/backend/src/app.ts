@@ -1,15 +1,25 @@
 import * as express from 'express';
+import 'express-async-errors';
+import errorMiddleware from './middlewares/errorMiddleware';
+import LoginRoutes from './routes/LoginRoutes';
 
 class App {
   public app: express.Express;
+  private loginRoutes: LoginRoutes;
 
   constructor() {
     this.app = express();
 
     this.config();
 
+    this.loginRoutes = new LoginRoutes();
+
     // Não remover essa rota
-    this.app.get('/', (req, res) => res.json({ ok: true }));
+    this.app.get('/', (_req, res) => res.json({ ok: true }));
+
+    this.app.use('/login', this.loginRoutes.loginRouter);
+
+    this.app.use(errorMiddleware);
   }
 
   private config():void {
