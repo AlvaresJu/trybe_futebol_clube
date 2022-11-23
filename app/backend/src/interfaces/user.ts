@@ -9,7 +9,7 @@ export interface IUserId extends IUser {
   id: number,
 }
 
-export interface IServiceUser {
+export interface IServiceLogin {
   statusCode: number,
   result: string,
 }

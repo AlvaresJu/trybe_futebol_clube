@@ -9,4 +9,10 @@ export default class UserController {
     const { statusCode, result } = await this.userService.login(email, password);
     return res.status(statusCode).json({ token: result });
   }
+
+  async validateLogin(req: Request, res: Response) {
+    const { authorization } = req.headers;
+    const { statusCode, result } = await this.userService.validateLogin(authorization);
+    return res.status(statusCode).json({ role: result });
+  }
 }
