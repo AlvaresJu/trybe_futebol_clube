@@ -8,5 +8,5 @@ export interface ITeamId extends ITeam {
 
 export interface IServiceTeams {
   statusCode: number;
-  result: ITeamId[];
+  result: ITeamId[] | ITeamId;
 }

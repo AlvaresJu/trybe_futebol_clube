@@ -8,5 +8,6 @@ export default class TeamsRoutes {
     this.teamsRouter = express.Router();
 
     this.teamsRouter.get('/', (req, res) => TeamsController.getAll(req, res));
+    this.teamsRouter.get('/:id', (req, res) => TeamsController.getById(req, res));
   }
 }
