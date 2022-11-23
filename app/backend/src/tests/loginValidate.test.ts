@@ -4,7 +4,7 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 
 import App from '../app';
-import User from '../database/models/UserModel';
+import Users from '../database/models/UsersModel';
 
 import { Response } from 'superagent';
 
@@ -18,17 +18,17 @@ describe('integration tests for /login/validate route', () => {
   let chaiHttpResponse: Response;
 
   beforeEach(async () => {
-    sinon.stub(User, 'findOne').resolves({
+    sinon.stub(Users, 'findOne').resolves({
       id: 3,
       username: 'Teste',
       role: 'user',
       email: 'teste@user.com',
       password: '$2a$08$ywuLtsyUHtY7ixJZvHIp0.RopAzKAY13E.jyl3O.uX0wmrhtyw6Zm'
-    } as User);
+    } as Users);
   });
 
   afterEach(()=>{
-    (User.findOne as sinon.SinonStub).restore();
+    (Users.findOne as sinon.SinonStub).restore();
   })
 
   it('tests a success login validate', async () => {
@@ -53,8 +53,8 @@ describe('integration tests for /login/validate route', () => {
   });
 
   it('tests a login validate attempt with an authorization token from an invalid user', async () => {
-    (User.findOne as sinon.SinonStub).restore();
-    sinon.stub(User, 'findOne').resolves(undefined);
+    (Users.findOne as sinon.SinonStub).restore();
+    sinon.stub(Users, 'findOne').resolves(undefined);
 
     chaiHttpResponse = await chai
       .request(app)

@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
 import { sign, verify } from 'jsonwebtoken';
-import { IAuthData, IJwtAuth } from '../interfaces/user';
+import { IAuthData, IJwtAuth } from '../interfaces/usersInterfaces';
 import HttpException from './HttpException';
 
 config();

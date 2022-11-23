@@ -1,18 +1,18 @@
 import { Request, Response } from 'express';
-import UserService from '../services/UserService';
+import UsersService from '../services/UsersService';
 
-export default class UserController {
-  constructor(private userService: UserService) { }
+export default class UsersController {
+  constructor(private usersService: UsersService) { }
 
   async login(req: Request, res: Response) {
     const { email, password } = req.body;
-    const { statusCode, result } = await this.userService.login(email, password);
+    const { statusCode, result } = await this.usersService.login(email, password);
     return res.status(statusCode).json({ token: result });
   }
 
   async validateLogin(req: Request, res: Response) {
     const { authorization } = req.headers;
-    const { statusCode, result } = await this.userService.validateLogin(authorization);
+    const { statusCode, result } = await this.usersService.validateLogin(authorization);
     return res.status(statusCode).json({ role: result });
   }
 }
