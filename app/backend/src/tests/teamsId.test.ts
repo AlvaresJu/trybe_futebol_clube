@@ -29,7 +29,7 @@ describe('integration tests for /teams/:id route', () => {
     (Teams.findOne as sinon.SinonStub).restore();
   })
 
-  it('tests a successful return of a team', async () => {
+  it('tests a successful return of GET a team', async () => {
     chaiHttpResponse = await chai
       .request(app)
       .get('/teams/2');
@@ -38,7 +38,7 @@ describe('integration tests for /teams/:id route', () => {
     expect(chaiHttpResponse.body).to.be.deep.equal(teamMock);
   });
 
-  it('tests a failed return from a non-existent team request', async () => {
+  it('tests a failed return from a non-existent team GET request', async () => {
     (Teams.findOne as sinon.SinonStub).restore();
     sinon.stub(Teams, 'findOne').resolves(undefined);
 

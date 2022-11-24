@@ -47,7 +47,7 @@ describe('integration tests for /teams route', () => {
     (Teams.findAll as sinon.SinonStub).restore();
   })
 
-  it('tests a successful return of team list', async () => {
+  it('tests a successful return of GET team list', async () => {
     chaiHttpResponse = await chai
       .request(app)
       .get('/teams');
