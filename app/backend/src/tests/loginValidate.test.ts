@@ -27,9 +27,9 @@ describe('integration tests for /login/validate route', () => {
     } as Users);
   });
 
-  afterEach(()=>{
+  afterEach(() => {
     (Users.findOne as sinon.SinonStub).restore();
-  })
+  });
 
   it('tests a success login validate', async () => {
     chaiHttpResponse = await chai
@@ -42,9 +42,7 @@ describe('integration tests for /login/validate route', () => {
   });
 
   it('tests a login validate attempt without authorization token', async () => {
-    chaiHttpResponse = await chai
-      .request(app)
-      .get('/login/validate');
+    chaiHttpResponse = await chai.request(app).get('/login/validate');
 
     expect(chaiHttpResponse.status).to.be.equal(401);
     expect(chaiHttpResponse.body).to.be.deep.equal({

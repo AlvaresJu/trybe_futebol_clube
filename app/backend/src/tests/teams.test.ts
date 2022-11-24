@@ -43,14 +43,12 @@ describe('integration tests for /teams route', () => {
     sinon.stub(Teams, 'findAll').resolves(teamListMock as Teams[]);
   });
 
-  afterEach(()=>{
+  afterEach(() => {
     (Teams.findAll as sinon.SinonStub).restore();
-  })
+  });
 
-  it('tests a successful return of GET team list', async () => {
-    chaiHttpResponse = await chai
-      .request(app)
-      .get('/teams');
+  it('tests a successful return from GET request of team list', async () => {
+    chaiHttpResponse = await chai.request(app).get('/teams');
 
     expect(chaiHttpResponse.status).to.be.equal(200);
     expect(chaiHttpResponse.body).to.be.deep.equal(teamListMock);

@@ -27,9 +27,9 @@ describe('integration tests for /login route', () => {
     } as Users);
   });
 
-  afterEach(()=>{
+  afterEach(() => {
     (Users.findOne as sinon.SinonStub).restore();
-  })
+  });
 
   it('tests a success login', async () => {
     chaiHttpResponse = await chai
