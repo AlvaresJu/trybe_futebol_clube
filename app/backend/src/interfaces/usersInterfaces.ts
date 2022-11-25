@@ -24,4 +24,5 @@ export interface IAuthData {
 export interface IJwtAuth {
   createToken(data: IAuthData): string;
   validateToken(token: string): number;
+  validateAuth(token: string | undefined): number;
 }

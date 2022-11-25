@@ -4,7 +4,7 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 
 import App from '../app';
-import Teams from '../database/models/TeamsModel';
+import TeamsModel from '../database/models/TeamsModel';
 
 import { Response } from 'superagent';
 
@@ -40,11 +40,11 @@ describe('integration tests for /teams route', () => {
   ];
 
   beforeEach(async () => {
-    sinon.stub(Teams, 'findAll').resolves(teamListMock as Teams[]);
+    sinon.stub(TeamsModel, 'findAll').resolves(teamListMock as TeamsModel[]);
   });
 
   afterEach(() => {
-    (Teams.findAll as sinon.SinonStub).restore();
+    (TeamsModel.findAll as sinon.SinonStub).restore();
   });
 
   it('tests a successful return from GET request of team list', async () => {

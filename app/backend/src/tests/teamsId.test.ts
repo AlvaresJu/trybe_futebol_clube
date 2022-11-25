@@ -4,7 +4,7 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 
 import App from '../app';
-import Teams from '../database/models/TeamsModel';
+import TeamsModel from '../database/models/TeamsModel';
 
 import { Response } from 'superagent';
 
@@ -22,11 +22,11 @@ describe('integration tests for /teams/:id route', () => {
     };
 
   beforeEach(async () => {
-    sinon.stub(Teams, 'findOne').resolves(teamMock as Teams);
+    sinon.stub(TeamsModel, 'findOne').resolves(teamMock as TeamsModel);
   });
 
   afterEach(() => {
-    (Teams.findOne as sinon.SinonStub).restore();
+    (TeamsModel.findOne as sinon.SinonStub).restore();
   });
 
   it('tests a successful return from GET request of a team', async () => {
@@ -37,14 +37,14 @@ describe('integration tests for /teams/:id route', () => {
   });
 
   it('tests a failed return from GET request of a non-existent team', async () => {
-    (Teams.findOne as sinon.SinonStub).restore();
-    sinon.stub(Teams, 'findOne').resolves(undefined);
+    (TeamsModel.findOne as sinon.SinonStub).restore();
+    sinon.stub(TeamsModel, 'findOne').resolves(undefined);
 
     chaiHttpResponse = await chai.request(app).get('/teams/99');
 
     expect(chaiHttpResponse.status).to.be.equal(404);
     expect(chaiHttpResponse.body).to.be.deep.equal({
-      message: 'Team does not exist',
+      message: 'There is no team with such id!',
     });
   });
 });

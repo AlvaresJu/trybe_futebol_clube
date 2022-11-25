@@ -1,18 +1,27 @@
 import * as express from 'express';
 import MatchesService from '../services/MatchesService';
 import MatchesController from '../controllers/MatchesController';
+import { IJwtAuth } from '../interfaces/usersInterfaces';
+import JwtAuth from '../utils/JwtAuth';
 
 export default class MatechesRoutes {
   public matchesRouter: express.IRouter;
+  private jwtAuth: IJwtAuth;
   private matchesService: MatchesService;
   private matchesController: MatchesController;
 
   constructor() {
     this.matchesRouter = express.Router();
 
-    this.matchesService = new MatchesService();
+    this.jwtAuth = new JwtAuth();
+    this.matchesService = new MatchesService(this.jwtAuth);
     this.matchesController = new MatchesController(this.matchesService);
 
-    this.matchesRouter.get('/', (req, res) => this.matchesController.getAll(req, res));
+    this.matchesRouter
+      .get('/', (req, res) => this.matchesController.getAll(req, res));
+    this.matchesRouter
+      .post('/', (req, res) => this.matchesController.insertInProgressMatch(req, res));
+    this.matchesRouter
+      .patch('/:id/finish', (req, res) => MatchesController.updateInProgressStatus(req, res));
   }
 }

@@ -22,7 +22,13 @@ export default class JwtAuth implements IJwtAuth {
       const { id } = verify(token, this._jwtSecret) as IAuthData;
       return id;
     } catch (_e) {
-      throw new HttpException(401, 'Invalid token');
+      throw new HttpException(401, 'Token must be a valid token');
     }
+  }
+
+  validateAuth(token: string | undefined): number {
+    if (!token) throw new HttpException(401, 'Token not found');
+
+    return this.validateToken(token);
   }
 }

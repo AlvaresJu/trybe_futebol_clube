@@ -1,23 +1,16 @@
-import { ITeam } from './teamsInterfaces';
-
-export interface IMatche {
+export interface IMatch {
   homeTeam: number;
   homeTeamGoals: number;
   awayTeam: number;
   awayTeamGoals: number;
-  inProgress: boolean;
 }
 
-export interface IMatcheId extends IMatche {
+export interface IMatchIdInProg extends IMatch {
   id: number;
-}
-
-export interface IMatcheTeamNames extends IMatcheId {
-  teamHome: ITeam;
-  teamAway: ITeam;
+  inProgress: boolean;
 }
 
 export interface IServiceMatches {
   statusCode: number;
-  result: IMatcheTeamNames[] | IMatcheId[];
+  result: IMatchIdInProg[] | IMatchIdInProg | string;
 }

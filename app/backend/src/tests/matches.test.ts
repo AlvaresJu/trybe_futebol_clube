@@ -6,7 +6,7 @@ import chaiHttp = require('chai-http');
 import App from '../app';
 
 import { Response } from 'superagent';
-import Matches from '../database/models/MatchesModel';
+import MatchesModel from '../database/models/MatchesModel';
 
 chai.use(chaiHttp);
 
@@ -16,7 +16,7 @@ const { expect } = chai;
 
 describe('integration tests for /matches route', () => {
   let chaiHttpResponse: Response;
-  const matcheListMock = [
+  const matchListMock = [
     {
       id: 1,
       homeTeam: 16,
@@ -76,28 +76,28 @@ describe('integration tests for /matches route', () => {
   ];
 
   beforeEach(() => {
-    sinon.stub(Matches, 'findAll')
-      .resolves(matcheListMock as unknown as Matches[]);
+    sinon.stub(MatchesModel, 'findAll')
+      .resolves(matchListMock as unknown as MatchesModel[]);
   });
 
   afterEach(() => {
-    (Matches.findAll as sinon.SinonStub).restore();
+    (MatchesModel.findAll as sinon.SinonStub).restore();
   });
 
   it('tests a successful return from GET request of matche list', async () => {
     chaiHttpResponse = await chai.request(app).get('/matches');
 
     expect(chaiHttpResponse.status).to.be.equal(200);
-    expect(chaiHttpResponse.body).to.be.deep.equal(matcheListMock);
+    expect(chaiHttpResponse.body).to.be.deep.equal(matchListMock);
   });
 
   it('tests a successful return from GET request of in-progress matches', async () => {
-    const inProgressMatchesMock = matcheListMock
+    const inProgressMatchesMock = matchListMock
       .filter(({ inProgress }) => inProgress);
 
-    (Matches.findAll as sinon.SinonStub).restore();
-    sinon.stub(Matches, 'findAll')
-      .resolves(inProgressMatchesMock as unknown as Matches[]);
+    (MatchesModel.findAll as sinon.SinonStub).restore();
+    sinon.stub(MatchesModel, 'findAll')
+      .resolves(inProgressMatchesMock as unknown as MatchesModel[]);
 
     chaiHttpResponse = await chai
       .request(app)
@@ -108,12 +108,12 @@ describe('integration tests for /matches route', () => {
   });
 
   it('tests a successful return from GET request of ended matches', async () => {
-    const endedMatchesMock = matcheListMock
+    const endedMatchesMock = matchListMock
       .filter(({ inProgress }) => !inProgress);
 
-    (Matches.findAll as sinon.SinonStub).restore();
-    sinon.stub(Matches, 'findAll')
-      .resolves(endedMatchesMock as unknown as Matches[]);
+    (MatchesModel.findAll as sinon.SinonStub).restore();
+    sinon.stub(MatchesModel, 'findAll')
+      .resolves(endedMatchesMock as unknown as MatchesModel[]);
 
     chaiHttpResponse = await chai
       .request(app)

@@ -20,7 +20,6 @@ export default class LoginRoutes {
 
     this.loginRouter
       .post('/', validateLoginFields, (req, res) => this.usersController.login(req, res));
-
     this.loginRouter.get('/validate', (req, res) => this.usersController.validateLogin(req, res));
   }
 }

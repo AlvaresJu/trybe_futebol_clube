@@ -18,6 +18,21 @@ export default class MatchesController {
   async getAll(req: Request, res: Response): Promise<Response> {
     const { inProgress } = req.query;
     if (inProgress) return this.getAllByInProgressStatus(req, res);
+
     return this.getAllWithTeamsName(req, res);
+  }
+
+  async insertInProgressMatch(req: Request, res: Response): Promise<Response> {
+    const { authorization } = req.headers;
+    const newMatchData = { ...req.body };
+    const { statusCode, result } = await this.matchesService
+      .insertInProgressMatch(authorization, newMatchData);
+    return res.status(statusCode).json(result);
+  }
+
+  static async updateInProgressStatus(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    const { statusCode, result } = await MatchesService.updateInProgressStatus(Number(id));
+    return res.status(statusCode).json({ message: result });
   }
 }
