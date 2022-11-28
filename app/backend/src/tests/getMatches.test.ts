@@ -14,7 +14,7 @@ const { app } = new App();
 
 const { expect } = chai;
 
-describe('integration tests for /matches route', () => {
+describe('integration tests for GET /matches routes', () => {
   let chaiHttpResponse: Response;
   const matchListMock = [
     {
@@ -84,14 +84,14 @@ describe('integration tests for /matches route', () => {
     (MatchesModel.findAll as sinon.SinonStub).restore();
   });
 
-  it('tests a successful return from GET request of matche list', async () => {
+  it('tests a successful return of matche list', async () => {
     chaiHttpResponse = await chai.request(app).get('/matches');
 
     expect(chaiHttpResponse.status).to.be.equal(200);
     expect(chaiHttpResponse.body).to.be.deep.equal(matchListMock);
   });
 
-  it('tests a successful return from GET request of in-progress matches', async () => {
+  it('tests a successful return of in-progress matches', async () => {
     const inProgressMatchesMock = matchListMock
       .filter(({ inProgress }) => inProgress);
 
@@ -107,7 +107,7 @@ describe('integration tests for /matches route', () => {
     expect(chaiHttpResponse.body).to.be.deep.equal(inProgressMatchesMock);
   });
 
-  it('tests a successful return from GET request of ended matches', async () => {
+  it('tests a successful return of ended matches', async () => {
     const endedMatchesMock = matchListMock
       .filter(({ inProgress }) => !inProgress);
 
@@ -123,7 +123,7 @@ describe('integration tests for /matches route', () => {
     expect(chaiHttpResponse.body).to.be.deep.equal(endedMatchesMock);
   });
 
-  it('tests a failed return from GET request of matches with an invalid "inProgress" param in the URL', async () => {
+  it('tests a failed return of matches with an invalid "inProgress" param in the URL', async () => {
     chaiHttpResponse = await chai
       .request(app)
       .get('/matches?inProgress=invalid');

@@ -18,7 +18,7 @@ describe('integration tests for /teams/:id route', () => {
   let chaiHttpResponse: Response;
   const teamMock = {
       id: 2,
-      teamName: "Bahia"
+      teamName: 'Bahia',
     };
 
   beforeEach(async () => {
