@@ -35,4 +35,12 @@ export default class MatchesController {
     const { statusCode, result } = await MatchesService.updateInProgressStatus(Number(id));
     return res.status(statusCode).json({ message: result });
   }
+
+  static async updateInProgressMatchGoals(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    const { statusCode, result } = await MatchesService
+      .updateInProgressMatchGoals(Number(id), homeTeamGoals, awayTeamGoals);
+    return res.status(statusCode).json({ message: result });
+  }
 }

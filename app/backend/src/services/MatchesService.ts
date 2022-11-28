@@ -2,7 +2,7 @@ import { FindOptions } from 'sequelize';
 import Match from '../entities/Match';
 import TeamsModel from '../database/models/TeamsModel';
 import MatchesModel from '../database/models/MatchesModel';
-import { IMatch, IServiceMatches } from '../interfaces/matchesInterfaces';
+import { IMatch, IServiceMatches, IMatchIdInProg } from '../interfaces/matchesInterfaces';
 import HttpException from '../utils/HttpException';
 import { IJwtAuth } from '../interfaces/usersInterfaces';
 import TeamsService from './TeamsService';
@@ -57,18 +57,41 @@ export default class MatchesService {
     return { statusCode: 201, result: newMatch };
   }
 
-  private static async checkMatchId(id: number): Promise<void> {
+  private static async checkMatchId(id: number): Promise<IMatchIdInProg> {
     const match = await MatchesModel.findOne({ where: { id } });
     if (!match) throw new HttpException(404, 'There is no match with such id!');
+
+    return match;
   }
 
-  static async updateInProgressStatus(matchId: number): Promise<IServiceMatches> {
-    await MatchesService.checkMatchId(matchId);
+  static async updateInProgressStatus(id: number): Promise<IServiceMatches> {
+    await MatchesService.checkMatchId(id);
 
     await MatchesModel.update(
       { inProgress: false },
-      { where: { id: matchId } },
+      { where: { id } },
     );
     return { statusCode: 200, result: 'Finished' };
+  }
+
+  private static async checkMatchStatus(id: number): Promise<void> {
+    const match = await MatchesService.checkMatchId(id);
+    if (!match.inProgress) {
+      throw new HttpException(400, 'This match has already ended and can not be updated.');
+    }
+  }
+
+  static async updateInProgressMatchGoals(
+    id: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ): Promise<IServiceMatches> {
+    await MatchesService.checkMatchStatus(id);
+
+    await MatchesModel.update(
+      { homeTeamGoals, awayTeamGoals },
+      { where: { id } },
+    );
+    return { statusCode: 200, result: 'Match goals updated' };
   }
 }

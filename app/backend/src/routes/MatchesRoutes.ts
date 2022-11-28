@@ -3,6 +3,7 @@ import MatchesService from '../services/MatchesService';
 import MatchesController from '../controllers/MatchesController';
 import { IJwtAuth } from '../interfaces/usersInterfaces';
 import JwtAuth from '../utils/JwtAuth';
+import validateGoalsFields from '../middlewares/matchGoalsMiddleware';
 
 export default class MatechesRoutes {
   public matchesRouter: express.IRouter;
@@ -23,5 +24,10 @@ export default class MatechesRoutes {
       .post('/', (req, res) => this.matchesController.insertInProgressMatch(req, res));
     this.matchesRouter
       .patch('/:id/finish', (req, res) => MatchesController.updateInProgressStatus(req, res));
+    this.matchesRouter.patch(
+      '/:id',
+      validateGoalsFields,
+      (req, res) => MatchesController.updateInProgressMatchGoals(req, res),
+    );
   }
 }
