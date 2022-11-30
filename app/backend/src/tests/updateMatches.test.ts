@@ -80,6 +80,37 @@ describe('integration tests for PATCH /matches routes', () => {
     expect(chaiHttpResponse.body).to.be.deep.equal({ message: 'Match goals updated' });
   });
 
+  it('tests an attempt to update goals without "homeTeamGoals" and "awayTeamGoals" informations', async () => {
+    chaiHttpResponse = await chai.request(app).patch('/matches/1');
+
+    expect(chaiHttpResponse.status).to.be.equal(400);
+    expect(chaiHttpResponse.body).to.be.deep.equal({ message: 'All fields must be filled' });
+  });
+
+  it('tests an attempt to update goals without "homeTeamGoals" information', async () => {
+    chaiHttpResponse = await chai
+      .request(app)
+      .patch('/matches/1')
+      .send({
+        awayTeamGoals: 4,
+      });
+
+    expect(chaiHttpResponse.status).to.be.equal(400);
+    expect(chaiHttpResponse.body).to.be.deep.equal({ message: 'All fields must be filled' });
+  });
+
+  it('tests an attempt to update goals without "awayTeamGoals" information', async () => {
+    chaiHttpResponse = await chai
+      .request(app)
+      .patch('/matches/1')
+      .send({
+        homeTeamGoals: 3,
+      });
+
+    expect(chaiHttpResponse.status).to.be.equal(400);
+    expect(chaiHttpResponse.body).to.be.deep.equal({ message: 'All fields must be filled' });
+  });
+
   it('tests an attempt to update goals of a non-existent match', async () => {
     (MatchesModel.findOne as sinon.SinonStub).restore();
     sinon.stub(MatchesModel, 'findOne').resolves(undefined);
