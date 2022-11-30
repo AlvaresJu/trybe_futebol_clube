@@ -22,7 +22,7 @@ export default class FilteredLeaderboard extends Leaderboard {
   ): number {
     return matches.reduce((victories, match) => {
       let victory: boolean;
-      if (filterOption === 'homeTeam') {
+      if (filterOption === 'home') {
         victory = match.homeTeamGoals > match.awayTeamGoals;
       } else {
         victory = match.homeTeamGoals < match.awayTeamGoals;
@@ -44,7 +44,7 @@ export default class FilteredLeaderboard extends Leaderboard {
   ): number {
     return matches.reduce((losses, match) => {
       let loss: boolean;
-      if (filterOption === 'homeTeam') {
+      if (filterOption === 'home') {
         loss = match.homeTeamGoals < match.awayTeamGoals;
       } else {
         loss = match.homeTeamGoals > match.awayTeamGoals;
@@ -57,11 +57,10 @@ export default class FilteredLeaderboard extends Leaderboard {
     matches: IMatchIdInProg[],
     filterOption: LeaderboardType,
   ): number {
-    if (filterOption === 'homeTeam') {
+    if (filterOption === 'home') {
       return matches
         .reduce((goals, match) => goals + match.homeTeamGoals, 0);
     }
-
     return matches
       .reduce((goals, match) => goals + match.awayTeamGoals, 0);
   }
@@ -70,11 +69,10 @@ export default class FilteredLeaderboard extends Leaderboard {
     matches: IMatchIdInProg[],
     filterOption: LeaderboardType,
   ): number {
-    if (filterOption === 'homeTeam') {
+    if (filterOption === 'home') {
       return matches
         .reduce((goals, match) => goals + match.awayTeamGoals, 0);
     }
-
     return matches
       .reduce((goals, match) => goals + match.homeTeamGoals, 0);
   }

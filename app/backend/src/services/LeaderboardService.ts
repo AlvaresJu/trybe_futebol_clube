@@ -5,45 +5,39 @@ import {
 import { ITeamId } from '../interfaces/teamsInterfaces';
 import MatchesModel from '../database/models/MatchesModel';
 import FilteredLeaderboard from '../entities/FilteredLeaderboard';
+import AllLeaderboard from '../entities/AllLeaderboard';
+import Leaderboard from '../entities/Leaderboard';
+import { IMatchIdInProg } from '../interfaces/matchesInterfaces';
 
 export default class LeaderboardService {
-  private static async setHomeTeamData(id: number, name: string): Promise<ILeaderboardData> {
-    const teamMatches = await MatchesModel.findAll({ where: {
-      inProgress: false,
-      homeTeam: id,
-    } });
-    const teamData = new FilteredLeaderboard(name, teamMatches, 'homeTeam');
-    return {
-      name: teamData.name,
-      totalPoints: teamData.totalPoints,
-      totalGames: teamData.totalGames,
-      totalVictories: teamData.totalVictories,
-      totalDraws: teamData.totalDraws,
-      totalLosses: teamData.totalLosses,
-      goalsFavor: teamData.goalsFavor,
-      goalsOwn: teamData.goalsOwn,
-      goalsBalance: teamData.goalsBalance,
-      efficiency: teamData.efficiency,
-    };
-  }
-
-  private static async setAwayTeamData(id: number, name: string): Promise<ILeaderboardData> {
-    const teamMatches = await MatchesModel.findAll({ where: {
+  private static async getTeamMatches(
+    id: number,
+    filterOption: LeaderboardType,
+  ): Promise<IMatchIdInProg[]> {
+    if (filterOption === 'home') {
+      return MatchesModel.findAll({ where: {
+        inProgress: false,
+        homeTeam: id,
+      } });
+    }
+    return MatchesModel.findAll({ where: {
       inProgress: false,
       awayTeam: id,
     } });
-    const teamData = new FilteredLeaderboard(name, teamMatches, 'awayTeam');
+  }
+
+  private static setLeaderboardTeamData(teamDataEntity: Leaderboard): ILeaderboardData {
     return {
-      name: teamData.name,
-      totalPoints: teamData.totalPoints,
-      totalGames: teamData.totalGames,
-      totalVictories: teamData.totalVictories,
-      totalDraws: teamData.totalDraws,
-      totalLosses: teamData.totalLosses,
-      goalsFavor: teamData.goalsFavor,
-      goalsOwn: teamData.goalsOwn,
-      goalsBalance: teamData.goalsBalance,
-      efficiency: teamData.efficiency,
+      name: teamDataEntity.name,
+      totalPoints: teamDataEntity.totalPoints,
+      totalGames: teamDataEntity.totalGames,
+      totalVictories: teamDataEntity.totalVictories,
+      totalDraws: teamDataEntity.totalDraws,
+      totalLosses: teamDataEntity.totalLosses,
+      goalsFavor: teamDataEntity.goalsFavor,
+      goalsOwn: teamDataEntity.goalsOwn,
+      goalsBalance: teamDataEntity.goalsBalance,
+      efficiency: teamDataEntity.efficiency,
     };
   }
 
@@ -52,13 +46,26 @@ export default class LeaderboardService {
     filterOption: LeaderboardType,
   ): Promise<ILeaderboardData[]> {
     const leadboardPromises = teams.map(async ({ id, teamName }) => {
-      if (filterOption === 'homeTeam') {
-        return LeaderboardService.setHomeTeamData(id, teamName);
-      }
-
-      return LeaderboardService.setAwayTeamData(id, teamName);
+      const teamMatches = await LeaderboardService.getTeamMatches(id, filterOption);
+      const teamData = new FilteredLeaderboard(teamName, teamMatches, filterOption);
+      return LeaderboardService.setLeaderboardTeamData(teamData);
     });
     return Promise.all(leadboardPromises);
+  }
+
+  private static async setAllLeaderboard(teams: ITeamId[]): Promise<ILeaderboardData[]> {
+    const homeLeaderboard = await LeaderboardService.setFilteredLeaderboard(teams, 'home');
+    const awayLeaderboard = await LeaderboardService.setFilteredLeaderboard(teams, 'away');
+
+    const allLeadboard = teams.map(({ teamName }) => {
+      const homeTeamData = homeLeaderboard
+        .find(({ name }) => name === teamName) as ILeaderboardData;
+      const awayTeamData = awayLeaderboard
+        .find(({ name }) => name === teamName) as ILeaderboardData;
+      const allTeamData = new AllLeaderboard(homeTeamData, awayTeamData);
+      return LeaderboardService.setLeaderboardTeamData(allTeamData);
+    });
+    return allLeadboard;
   }
 
   private static sortByTotalPoints(leaderboardData: ILeaderboardData[]) {
@@ -69,7 +76,7 @@ export default class LeaderboardService {
       const sameGoalsFavor = teamA.goalsFavor === teamB.goalsFavor;
 
       const goalsFavorCriterion = sameGoalsFavor
-        ? teamB.goalsOwn - teamA.goalsOwn : teamB.goalsFavor - teamA.goalsFavor;
+        ? teamA.goalsOwn - teamB.goalsOwn : teamB.goalsFavor - teamA.goalsFavor;
       const goalsBalanceCriterion = sameGoalsBalance
         ? goalsFavorCriterion : teamB.goalsBalance - teamA.goalsBalance;
       const totalVictoriesCriterion = sameTotalVictories
@@ -82,6 +89,13 @@ export default class LeaderboardService {
   static async getFilteredLeaderboard(filterOption: LeaderboardType): Promise<IServiceLeaderboard> {
     const teams = await TeamsModel.findAll();
     const leaderboardData = await LeaderboardService.setFilteredLeaderboard(teams, filterOption);
+    const result = LeaderboardService.sortByTotalPoints(leaderboardData);
+    return { statusCode: 200, result };
+  }
+
+  static async getAllLeaderboard(): Promise<IServiceLeaderboard> {
+    const teams = await TeamsModel.findAll();
+    const leaderboardData = await LeaderboardService.setAllLeaderboard(teams);
     const result = LeaderboardService.sortByTotalPoints(leaderboardData);
     return { statusCode: 200, result };
   }

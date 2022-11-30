@@ -164,7 +164,32 @@ describe('integration tests for /leaderboard routes', () => {
       efficiency: '33.33',
     },
   ];
-
+  const allLeaderboardMock = [
+    {
+      name: 'Avaí/Kindermann',
+      totalPoints: 4,
+      totalGames: 5,
+      totalVictories: 1,
+      totalDraws: 1,
+      totalLosses: 3,
+      goalsFavor: 4,
+      goalsOwn: 8,
+      goalsBalance: -4,
+      efficiency: '26.67',
+    },
+    {
+      name: 'Bahia',
+      totalPoints: 2,
+      totalGames: 5,
+      totalVictories: 0,
+      totalDraws: 2,
+      totalLosses: 3,
+      goalsFavor: 2,
+      goalsOwn: 6,
+      goalsBalance: -4,
+      efficiency: '13.33',
+    },
+  ];
 
   beforeEach(async () => {
     sinon.stub(TeamsModel, 'findAll').resolves(teamListMock as TeamsModel[]);
@@ -196,5 +221,18 @@ describe('integration tests for /leaderboard routes', () => {
 
     expect(chaiHttpResponse.status).to.be.equal(200);
     expect(chaiHttpResponse.body).to.be.deep.equal(awayLeaderboardMock);
+  });
+
+  it('tests a successful return from GET request of all leaderboard', async () => {
+    sinon.stub(MatchesModel, 'findAll')
+      .onCall(0).resolves(avaiHomeTeamMatchesMock as MatchesModel[])
+      .onCall(1).resolves(bahiaHomeTeamMatchesMock as MatchesModel[])
+      .onCall(2).resolves(avaiAwayTeamMatchesMock as MatchesModel[])
+      .onCall(3).resolves(bahiaAwayTeamMatchesMock as MatchesModel[]);
+
+    chaiHttpResponse = await chai.request(app).get('/leaderboard');
+
+    expect(chaiHttpResponse.status).to.be.equal(200);
+    expect(chaiHttpResponse.body).to.be.deep.equal(allLeaderboardMock);
   });
 });

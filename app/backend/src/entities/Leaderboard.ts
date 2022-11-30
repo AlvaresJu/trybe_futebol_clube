@@ -1,6 +1,6 @@
 import { ILeaderboardData, ILeaderboardSettedData } from '../interfaces/leaderboardInterfaces';
 
-export default class Leaderboard implements ILeaderboardData {
+export default abstract class Leaderboard implements ILeaderboardData {
   private _name: string;
   private _totalPoints: number;
   private _totalGames: number;

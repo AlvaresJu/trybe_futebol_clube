@@ -8,8 +8,10 @@ export default class LeaderboardRoutes {
     this.leaderboardRouter = express.Router();
 
     this.leaderboardRouter
-      .get('/home', (req, res) => LeaderboardController.getHomeTeamLeaderboard(req, res));
+      .get('/', (req, res) => LeaderboardController.getAllLeaderboard(req, res));
     this.leaderboardRouter
-      .get('/away', (req, res) => LeaderboardController.getAwayTeamLeaderboard(req, res));
+      .get('/home', (req, res) => LeaderboardController.getFilteredLeaderboard(req, res));
+    this.leaderboardRouter
+      .get('/away', (req, res) => LeaderboardController.getFilteredLeaderboard(req, res));
   }
 }

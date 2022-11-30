@@ -1,4 +1,4 @@
-export type LeaderboardType = 'homeTeam' | 'awayTeam';
+export type LeaderboardType = 'home' | 'away';
 
 export interface ILeaderboardSettedData {
   name: string;
