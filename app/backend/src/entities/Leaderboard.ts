@@ -1,4 +1,4 @@
-import { ILeaderboardData, ILeaderboardSettedData } from '../interfaces/leaderboardInterfaces';
+import { ILeaderboardData, IFilteredLeaderboardData } from '../interfaces/leaderboardInterfaces';
 
 export default abstract class Leaderboard implements ILeaderboardData {
   private _name: string;
@@ -12,7 +12,7 @@ export default abstract class Leaderboard implements ILeaderboardData {
   private _goalsBalance: number;
   private _efficiency: string;
 
-  constructor(settedData: ILeaderboardSettedData) {
+  constructor(settedData: IFilteredLeaderboardData) {
     this._name = settedData.name;
     this._totalGames = settedData.totalGames;
     this._totalVictories = settedData.totalVictories;

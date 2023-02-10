@@ -4,10 +4,10 @@ import {
 } from '../interfaces/leaderboardInterfaces';
 import { ITeamId } from '../interfaces/teamsInterfaces';
 import MatchesModel from '../database/models/MatchesModel';
-import FilteredLeaderboard from '../entities/FilteredLeaderboard';
 import AllLeaderboard from '../entities/AllLeaderboard';
 import Leaderboard from '../entities/Leaderboard';
 import { IMatchIdInProg } from '../interfaces/matchesInterfaces';
+import LeaderboarFactory from '../entities/LeaderboardFactory';
 
 export default class LeaderboardService {
   private static async getTeamMatches(
@@ -47,7 +47,7 @@ export default class LeaderboardService {
   ): Promise<ILeaderboardData[]> {
     const leadboardPromises = teams.map(async ({ id, teamName }) => {
       const teamMatches = await LeaderboardService.getTeamMatches(id, filterOption);
-      const teamData = new FilteredLeaderboard(teamName, teamMatches, filterOption);
+      const teamData = LeaderboarFactory.createLeaderboard(teamName, teamMatches, filterOption);
       return LeaderboardService.setLeaderboardTeamData(teamData);
     });
     return Promise.all(leadboardPromises);
