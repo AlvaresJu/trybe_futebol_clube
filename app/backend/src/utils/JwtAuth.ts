@@ -13,7 +13,7 @@ export default class JwtAuth implements IJwtAuth {
   }
 
   createToken(data: IAuthData): string {
-    const token = sign(data, this._jwtSecret, { expiresIn: '7d' });
+    const token = sign(data, this._jwtSecret, { expiresIn: '120d' });
     return token;
   }
 

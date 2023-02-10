@@ -54,7 +54,7 @@ describe('integration tests for POST /matches route', () => {
     chaiHttpResponse = await chai
       .request(app)
       .post('/matches')
-      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJUZXN0ZSIsImlhdCI6MTY2OTIyNDgyOCwiZXhwIjoxNjY5ODI5NjI4fQ.cdxH1f-RRgYNomeH--e7tIpWr3CMVP7MEG0R3OA2eyw')
+      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJVc2VyIiwiaWF0IjoxNjc2MDA4OTM2LCJleHAiOjE2NzY2MTM3MzZ9.iwVhsqzIw9nEtW5OFJkj2eQUr40yzoPUyG2b3MDV7Ww')
       .send({
         homeTeam: 16,
         homeTeamGoals: 2,
@@ -89,7 +89,7 @@ describe('integration tests for POST /matches route', () => {
   it('tests an attempt to save a new match without "homeTeam" information', async () => {
     chaiHttpResponse = await chai
       .request(app).post('/matches')
-      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJUZXN0ZSIsImlhdCI6MTY2OTIyNDgyOCwiZXhwIjoxNjY5ODI5NjI4fQ.cdxH1f-RRgYNomeH--e7tIpWr3CMVP7MEG0R3OA2eyw')
+      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsImlhdCI6MTY3NjAwODA2MCwiZXhwIjoxNjg2Mzc2MDYwfQ.BNcBgdAx_Q-jPkQHL_E_mgUE4TGuNMPxI-XTxG0sIB8')
       .send({
         homeTeamGoals: 2,
         awayTeam: 8,
@@ -105,7 +105,7 @@ describe('integration tests for POST /matches route', () => {
   it('tests an attempt to save a new match with invalid "homeTeam" information (not a number)', async () => {
     chaiHttpResponse = await chai
       .request(app).post('/matches')
-      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJUZXN0ZSIsImlhdCI6MTY2OTIyNDgyOCwiZXhwIjoxNjY5ODI5NjI4fQ.cdxH1f-RRgYNomeH--e7tIpWr3CMVP7MEG0R3OA2eyw')
+      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsImlhdCI6MTY3NjAwODA2MCwiZXhwIjoxNjg2Mzc2MDYwfQ.BNcBgdAx_Q-jPkQHL_E_mgUE4TGuNMPxI-XTxG0sIB8')
       .send({
         homeTeam: '16',
         homeTeamGoals: 2,
@@ -122,7 +122,7 @@ describe('integration tests for POST /matches route', () => {
   it('tests an attempt to save a new match with invalid "awayTeam" information (not an integer)', async () => {
     chaiHttpResponse = await chai
       .request(app).post('/matches')
-      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJUZXN0ZSIsImlhdCI6MTY2OTIyNDgyOCwiZXhwIjoxNjY5ODI5NjI4fQ.cdxH1f-RRgYNomeH--e7tIpWr3CMVP7MEG0R3OA2eyw')
+      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsImlhdCI6MTY3NjAwODA2MCwiZXhwIjoxNjg2Mzc2MDYwfQ.BNcBgdAx_Q-jPkQHL_E_mgUE4TGuNMPxI-XTxG0sIB8')
       .send({
         homeTeam: 16,
         homeTeamGoals: 2,
@@ -139,7 +139,7 @@ describe('integration tests for POST /matches route', () => {
   it('tests an attempt to save a new match with invalid "awayTeam" information (lass than 1)', async () => {
     chaiHttpResponse = await chai
       .request(app).post('/matches')
-      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJUZXN0ZSIsImlhdCI6MTY2OTIyNDgyOCwiZXhwIjoxNjY5ODI5NjI4fQ.cdxH1f-RRgYNomeH--e7tIpWr3CMVP7MEG0R3OA2eyw')
+      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsImlhdCI6MTY3NjAwODA2MCwiZXhwIjoxNjg2Mzc2MDYwfQ.BNcBgdAx_Q-jPkQHL_E_mgUE4TGuNMPxI-XTxG0sIB8')
       .send({
         homeTeam: 16,
         homeTeamGoals: 2,
@@ -156,7 +156,7 @@ describe('integration tests for POST /matches route', () => {
   it('tests an attempt to save a new match with invalid "homeTeamGoals" information (not an integer)', async () => {
     chaiHttpResponse = await chai
       .request(app).post('/matches')
-      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJUZXN0ZSIsImlhdCI6MTY2OTIyNDgyOCwiZXhwIjoxNjY5ODI5NjI4fQ.cdxH1f-RRgYNomeH--e7tIpWr3CMVP7MEG0R3OA2eyw')
+      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsImlhdCI6MTY3NjAwODA2MCwiZXhwIjoxNjg2Mzc2MDYwfQ.BNcBgdAx_Q-jPkQHL_E_mgUE4TGuNMPxI-XTxG0sIB8')
       .send({
         homeTeam: 16,
         homeTeamGoals: 2.7,
@@ -173,7 +173,7 @@ describe('integration tests for POST /matches route', () => {
   it('tests an attempt to save a new match with invalid "homeTeamGoals" information (lass than 0)', async () => {
     chaiHttpResponse = await chai
       .request(app).post('/matches')
-      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJUZXN0ZSIsImlhdCI6MTY2OTIyNDgyOCwiZXhwIjoxNjY5ODI5NjI4fQ.cdxH1f-RRgYNomeH--e7tIpWr3CMVP7MEG0R3OA2eyw')
+      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsImlhdCI6MTY3NjAwODA2MCwiZXhwIjoxNjg2Mzc2MDYwfQ.BNcBgdAx_Q-jPkQHL_E_mgUE4TGuNMPxI-XTxG0sIB8')
       .send({
         homeTeam: 16,
         homeTeamGoals: -5,
@@ -190,7 +190,7 @@ describe('integration tests for POST /matches route', () => {
   it('tests an attempt to save a new match without "awayTeamGoals" information', async () => {
     chaiHttpResponse = await chai
       .request(app).post('/matches')
-      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJUZXN0ZSIsImlhdCI6MTY2OTIyNDgyOCwiZXhwIjoxNjY5ODI5NjI4fQ.cdxH1f-RRgYNomeH--e7tIpWr3CMVP7MEG0R3OA2eyw')
+      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsImlhdCI6MTY3NjAwODA2MCwiZXhwIjoxNjg2Mzc2MDYwfQ.BNcBgdAx_Q-jPkQHL_E_mgUE4TGuNMPxI-XTxG0sIB8')
       .send({
         homeTeam: 16,
         homeTeamGoals: 2,
@@ -206,7 +206,7 @@ describe('integration tests for POST /matches route', () => {
   it('tests an attempt to save a new match with invalid "awayTeamGoals" information (not a number)', async () => {
     chaiHttpResponse = await chai
       .request(app).post('/matches')
-      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJUZXN0ZSIsImlhdCI6MTY2OTIyNDgyOCwiZXhwIjoxNjY5ODI5NjI4fQ.cdxH1f-RRgYNomeH--e7tIpWr3CMVP7MEG0R3OA2eyw')
+      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsImlhdCI6MTY3NjAwODA2MCwiZXhwIjoxNjg2Mzc2MDYwfQ.BNcBgdAx_Q-jPkQHL_E_mgUE4TGuNMPxI-XTxG0sIB8')
       .send({
         homeTeam: 16,
         homeTeamGoals: 2,
@@ -223,7 +223,7 @@ describe('integration tests for POST /matches route', () => {
   it('tests an attempt to save a new match with the same "homeTeam" and "awayTeam"', async () => {
     chaiHttpResponse = await chai
       .request(app).post('/matches')
-      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJUZXN0ZSIsImlhdCI6MTY2OTIyNDgyOCwiZXhwIjoxNjY5ODI5NjI4fQ.cdxH1f-RRgYNomeH--e7tIpWr3CMVP7MEG0R3OA2eyw')
+      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsImlhdCI6MTY3NjAwODA2MCwiZXhwIjoxNjg2Mzc2MDYwfQ.BNcBgdAx_Q-jPkQHL_E_mgUE4TGuNMPxI-XTxG0sIB8')
       .send({
         homeTeam: 8,
         homeTeamGoals: 2,
@@ -245,7 +245,7 @@ describe('integration tests for POST /matches route', () => {
 
     chaiHttpResponse = await chai
       .request(app).post('/matches')
-      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJUZXN0ZSIsImlhdCI6MTY2OTIyNDgyOCwiZXhwIjoxNjY5ODI5NjI4fQ.cdxH1f-RRgYNomeH--e7tIpWr3CMVP7MEG0R3OA2eyw')
+      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsImlhdCI6MTY3NjAwODA2MCwiZXhwIjoxNjg2Mzc2MDYwfQ.BNcBgdAx_Q-jPkQHL_E_mgUE4TGuNMPxI-XTxG0sIB8')
       .send({
         homeTeam: 99,
         homeTeamGoals: 2,
@@ -267,7 +267,7 @@ describe('integration tests for POST /matches route', () => {
 
     chaiHttpResponse = await chai
       .request(app).post('/matches')
-      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJUZXN0ZSIsImlhdCI6MTY2OTIyNDgyOCwiZXhwIjoxNjY5ODI5NjI4fQ.cdxH1f-RRgYNomeH--e7tIpWr3CMVP7MEG0R3OA2eyw')
+      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsImlhdCI6MTY3NjAwODA2MCwiZXhwIjoxNjg2Mzc2MDYwfQ.BNcBgdAx_Q-jPkQHL_E_mgUE4TGuNMPxI-XTxG0sIB8')
       .send({
         homeTeam: 16,
         homeTeamGoals: 2,

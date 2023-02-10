@@ -35,7 +35,7 @@ describe('integration tests for /login/validate route', () => {
     chaiHttpResponse = await chai
       .request(app)
       .get('/login/validate')
-      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJUZXN0ZSIsImlhdCI6MTY2OTIyNDgyOCwiZXhwIjoxNjY5ODI5NjI4fQ.cdxH1f-RRgYNomeH--e7tIpWr3CMVP7MEG0R3OA2eyw');
+      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsImlhdCI6MTY3NjAwODA2MCwiZXhwIjoxNjg2Mzc2MDYwfQ.BNcBgdAx_Q-jPkQHL_E_mgUE4TGuNMPxI-XTxG0sIB8');
 
     expect(chaiHttpResponse.status).to.be.equal(200);
     expect(chaiHttpResponse.body).to.be.deep.equal({ role: 'user' });
