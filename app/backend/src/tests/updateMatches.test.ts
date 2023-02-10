@@ -7,6 +7,7 @@ import App from '../app';
 
 import { Response } from 'superagent';
 import MatchesModel from '../database/models/MatchesModel';
+import { finishedMatchMock, matchMock } from './mocks/matchesMock';
 
 chai.use(chaiHttp);
 
@@ -16,23 +17,6 @@ const { expect } = chai;
 
 describe('integration tests for PATCH /matches routes', () => {
   let chaiHttpResponse: Response;
-
-  const matchMock = {
-    id: 1,
-    homeTeam: 16,
-    homeTeamGoals: 2,
-    awayTeam: 8,
-    awayTeamGoals: 2,
-    inProgress: true,
-  };
-  const finishedMatchMock = {
-    id: 1,
-    homeTeam: 16,
-    homeTeamGoals: 2,
-    awayTeam: 8,
-    awayTeamGoals: 2,
-    inProgress: false,
-  }
   const updateReturnMock = [1];
 
   beforeEach(() => {

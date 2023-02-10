@@ -7,6 +7,7 @@ import App from '../app';
 
 import { Response } from 'superagent';
 import MatchesModel from '../database/models/MatchesModel';
+import { matchListMock } from './mocks/matchesMock';
 
 chai.use(chaiHttp);
 
@@ -16,65 +17,7 @@ const { expect } = chai;
 
 describe('integration tests for GET /matches routes', () => {
   let chaiHttpResponse: Response;
-  const matchListMock = [
-    {
-      id: 1,
-      homeTeam: 16,
-      homeTeamGoals: 1,
-      awayTeam: 8,
-      awayTeamGoals: 1,
-      inProgress: false,
-      teamHome: {
-        teamName: 'São Paulo'
-      },
-      teamAway: {
-        teamName: 'Grêmio'
-      }
-    },
-    {
-      id: 2,
-      homeTeam: 9,
-      homeTeamGoals: 1,
-      awayTeam: 14,
-      awayTeamGoals: 1,
-      inProgress: false,
-      teamHome: {
-        teamName: 'Internacional'
-      },
-      teamAway: {
-        teamName: 'Santos'
-      }
-    },
-    {
-      id: 41,
-      homeTeam: 16,
-      homeTeamGoals: 2,
-      awayTeam: 9,
-      awayTeamGoals: 0,
-      inProgress: true,
-      teamHome: {
-        teamName: 'São Paulo'
-      },
-      teamAway: {
-        teamName: 'Internacional'
-      }
-    },
-    {
-      id: 47,
-      homeTeam: 8,
-      homeTeamGoals: 1,
-      awayTeam: 14,
-      awayTeamGoals: 2,
-      inProgress: true,
-      teamHome: {
-        teamName: 'Grêmio'
-      },
-      teamAway: {
-        teamName: 'Santos'
-      }
-    },
-  ];
-
+  
   beforeEach(() => {
     sinon.stub(MatchesModel, 'findAll')
       .resolves(matchListMock as unknown as MatchesModel[]);

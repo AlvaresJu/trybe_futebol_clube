@@ -7,6 +7,7 @@ import App from '../app';
 import TeamsModel from '../database/models/TeamsModel';
 
 import { Response } from 'superagent';
+import { teamListMock } from './mocks/teamsMock';
 
 chai.use(chaiHttp);
 
@@ -16,28 +17,6 @@ const { expect } = chai;
 
 describe('integration tests for /teams route', () => {
   let chaiHttpResponse: Response;
-  const teamListMock = [
-    {
-      id: 1,
-      teamName: "Avaí/Kindermann"
-    },
-    {
-      id: 2,
-      teamName: "Bahia"
-    },
-    {
-      id: 3,
-      teamName: "Botafogo"
-    },
-    {
-      id: 4,
-      teamName: "Corinthians"
-    },
-    {
-      id: 5,
-      teamName: "Cruzeiro"
-    }
-  ];
 
   beforeEach(async () => {
     sinon.stub(TeamsModel, 'findAll').resolves(teamListMock as TeamsModel[]);
