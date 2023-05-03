@@ -38,14 +38,14 @@ describe('integration tests for POST /matches route', () => {
     chaiHttpResponse = await chai
       .request(app)
       .post('/matches')
-      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJVc2VyIiwiaWF0IjoxNjc2MDA4OTM2LCJleHAiOjE2NzY2MTM3MzZ9.iwVhsqzIw9nEtW5OFJkj2eQUr40yzoPUyG2b3MDV7Ww')
+      .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJVc2VyIiwiaWF0IjoxNjgyNTM1MzA2LCJleHAiOjE2OTI5MDMzMDZ9.jq_X8oTW1ngPF_uGw17IIFtk8rmm33h0fY9GURpMZ0Q')
       .send({
         homeTeam: 16,
         homeTeamGoals: 2,
         awayTeam: 8,
         awayTeamGoals: 2,
       });
-
+    
     expect(chaiHttpResponse.status).to.be.equal(201);
     expect(chaiHttpResponse.body).to.be.deep.equal(matchMock);
   });
