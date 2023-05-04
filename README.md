@@ -35,7 +35,7 @@
 
 
 # Sobre o Projeto
-  O projeto Trybe Futebol Clube (TFC) é uma aplicação fullstack de um site informativo sobre partidas e classificações de futebol. Nesse projeto foi desenvilvido o back-end, composto por uma API REST que acessa banco de dados relacional, com rotas para leitura, cadastro e edição de informações sobre partidas de futebol e classificações de times. A API construída é consimida por um front-end desenvolvido e provido pela [Trybe](https://www.betrybe.com/).
+  O projeto Trybe Futebol Clube (TFC) é uma aplicação fullstack de um site informativo sobre partidas e classificações de futebol. Nesse projeto foi desenvolvido o back-end, composto por uma API REST que acessa banco de dados relacional, com rotas para leitura, cadastro e edição de informações sobre partidas de futebol e classificações de times. A API construída é consumida por um front-end desenvolvido e provido pela [Trybe](https://www.betrybe.com/).
 
 ## Contexto
   Esse projeto foi desenvolvido por _[Juliana Álvares](https://www.linkedin.com/in/juliana-alvares/)_, como parte do processo de aprendizado do Módulo de Back-end, do curso de Desenvolvimento Web da [Trybe](https://www.betrybe.com/) :rocket:
@@ -80,7 +80,7 @@
 
     Tais rotas possibilitam as seguintes funcionalidades no front-end:
 
-      ![TrybeTunes Gif][product-gif]
+      <!-- ![TrybeTunes Gif][product-gif] -->
 
       - Visualização da tabela e classificação geral dos times, com pontuações;
       - Visualização da tabela e classificação dos times mandantes, com pontuações;
@@ -117,7 +117,7 @@
   ```
   Após confirmação dos 3 containers rodando, acessar página: `http://localhost:3000/`
 
-  Obs.: Dados (email e senha) para login como administrador para testes via front-end contidos no arquivo `app/backend/src/database/seeders/20211205212238-users.js`
+  Obs.: Dados (email e senha) para login como administrador, para testes via front-end, estão contidos no arquivo: `app/backend/src/database/seeders/20211205212238-users.js`
 <!-- ## Acessando Container e Instalando Dependências
   ```bash
     docker exec -it blogs_api bash
@@ -153,7 +153,7 @@
 [product-screenshot]: images/screenshot.png
 [routes-screenshot]: images/routes.png
 [der-screenshot]: images/diagrama-er.png
-[product-gif]: images/features.gif
+<!-- [product-gif]: images/features.gif -->
 [MySQL-img]: https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white
 [MySQL-url]: https://www.mysql.com/
 [Node-img]: https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white
