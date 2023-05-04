@@ -71,6 +71,7 @@
   - Construção de banco de dados MySQL, utilizando a ORM (Object Relational Mapper) Sequelize, com base no seguinte diagrama de Entidade-Relacionamento fornecido pela [Trybe](https://www.betrybe.com/):
 
     ![Diagrama ER do Banco][der-screenshot]
+
     Fonte: TRYBE, 2022
 
   - API REST com os seguintes endpoints, conectados ao banco de dados, desenvolvida em modelo de camadas MSC (Model, Service e Controller):
@@ -115,6 +116,7 @@
     npm run compose:up
   ```
   Após confirmação dos 3 containers rodando, acessar página: `http://localhost:3000/`
+
   Obs.: Dados (email e senha) para login como administrador para testes via front-end contidos no arquivo `app/backend/src/database/seeders/20211205212238-users.js`
 <!-- ## Acessando Container e Instalando Dependências
   ```bash
