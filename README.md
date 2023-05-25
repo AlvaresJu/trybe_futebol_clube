@@ -143,10 +143,10 @@
   Como descrito, este projeto foi proposto pela [Trybe](https://www.betrybe.com/) e desenvolvido por _[Juliana Álvares](https://www.linkedin.com/in/juliana-alvares/)_ durante o curso de Desenvolvimento Web realizado. Por isso, foram disponibilizados pela Trybe alguns arquivos base de configurações e auxiliares ao desenvolvimento do projeto, além de toda a parte do front-end. Segue especificação de autoria dos principais documentos:
   
   Arquivos/diretórios desenvolvidos pela autora do projeto (Juliana Álvares):
-  > README.md | images/** | app/frontend/Dockerfile | app/backend/Dockerfile | app/backend/packages.npm | app/backend/src/controllers/** | app/backend/src/database/migrations/** | app/backend/src/database/models/** | app/backend/src/database/seeders/** | app/backend/src/entities/** | app/backend/src/interfaces/** | app/backend/src/middlewares/** | app/backend/src/routes/** | app/backend/src/services/** | app/backend/src/tests/** | app/backend/src/utils/** | app/backend/src/app.ts
+  > README.md | images/** | app/frontend/Dockerfile | quase todos os arquivios em app/backend/**
   
   Arquivos/diretórios desenvolvidos pela Trybe:
-  > .editorconfig | apps_install.sh | db.exemple.sql | dockerfile_dennylist.sh | package.json | package-lock.json | app/docker-compose.yml | app/docker-compose.dev.yml | app/frontend/** | app/backend/.eslintrc.json | app/backend/.env.example | app/backend/package.json | app/backend/package-lock.json | app/backend/.sequelizerc | app/backend/nyc.config.js | app/backend/tsc_eval.sh | app/backend/tsconfig.json | app/backend/src/database/config/** | app/backend/src/database/migrations/99999999999999-create-z.js | app/backend/src/database/models/index.ts | app/backend/src/server.ts
+  > Arquivos com configurações iniciais do projeto, como: .editorconfig | apps_install.sh | db.exemple.sql | dockerfile_dennylist.sh | versão inicial de package.json e package-lock.json | app/backend/.sequelizerc | app/backend/nyc.config.js | app/backend/tsc_eval.sh | app/backend/tsconfig.json | app/backend/src/database/config/** | praticamente todos os arquivos em app/frontend/**
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
